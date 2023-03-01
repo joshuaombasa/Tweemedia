@@ -1,6 +1,28 @@
 import { tweetsData } from './data.js'
 
 const container = document.getElementById("container")
+let targetObj = []
+container.addEventListener('click', (e) => {
+    targetObj = tweetsData.filter((tweet) => {
+        if (tweet.uuid === e.target.id) {
+            return tweet
+        }
+    })[0]
+    
+    handleLikes()
+    
+    render()
+})
+
+function handleLikes() {
+    if (!targetObj.isLiked) {
+        targetObj.likes  ++
+        targetObj.isLiked = !targetObj.isLiked
+    } else {
+        targetObj.likes  --
+        targetObj.isLiked = !targetObj.isLiked
+    }
+}
 
 function render() {
     let usersHtml = ''
@@ -12,9 +34,9 @@ function render() {
                 <p class="user-name" id="user-name">${tweet.handle}</p>
                 <p class="user-post" id="user-post">${tweet.tweetText}</p>
                 <div class="post-stats" id="post-stats">
-                      <i class="fa-solid fa-comment"><span class="stats-text-styling">${tweet.replies.length}</span></i>
-                      <i class="fa-solid fa-heart"><span class="stats-text-styling">${tweet.likes}</span></i>
-                      <i class="fa-solid fa-retweet"><span class="stats-text-styling">${tweet.retweets}</span></i>
+                      <i class="fa-solid fa-comment stats-text-styling" id="${tweet.uuid}">${tweet.replies.length}</i>
+                      <i class="fa-solid fa-heart stats-text-styling" id="${tweet.uuid}">${tweet.likes}</i>
+                      <i class="fa-solid fa-retweet stats-text-styling" id="${tweet.uuid}">${tweet.retweets}</i>
                 </div>
             </div>
         </div>
