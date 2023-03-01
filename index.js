@@ -10,6 +10,7 @@ container.addEventListener('click', (e) => {
     })[0]
     
     handleLikes()
+    handleRetweets()
     
     render()
 })
@@ -17,11 +18,24 @@ container.addEventListener('click', (e) => {
 function handleLikes() {
     if (!targetObj.isLiked) {
         targetObj.likes  ++
-        targetObj.isLiked = !targetObj.isLiked
     } else {
-        targetObj.likes  --
-        targetObj.isLiked = !targetObj.isLiked
+        targetObj.likes  -- 
     }
+
+    targetObj.isLiked = !targetObj.isLiked
+}
+
+
+function handleRetweets() {
+    if (!targetObj.isRetweeted) {
+        targetObj.retweets ++
+
+    } else {
+        targetObj.retweets ++
+        
+    }
+
+    targetObj.isRetweeted = !targetObj.isRetweeted
 }
 
 function render() {
